@@ -3,14 +3,14 @@ from telegram import Update
 from telegram.ext import Application, CommandHandler, ContextTypes
 import random
 
-Настройка логирования
+# Настройка логирования
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     level=logging.INFO
 )
 logger = logging.getLogger(__name__)
 
-Эко советы
+# Эко советы
 ECO_TIPS = [
     "♻️ Используйте многоразовые сумки вместо пластиковых пакетов",
     "💡 Выключайте свет при выходе из комнаты",
@@ -34,7 +34,7 @@ ECO_TIPS = [
     "🚿 Уменьшите время приёма душа на 2 минуты для экономии воды"
 ]
 
-Обработчики команд
+# Обработчики команд
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     user = update.effective_user
     await update.message.reply_html(
@@ -65,18 +65,18 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
     )
 
 def main() -> None:
-    TOKEN = "Токен от BotFather"
+    TOKEN = "Токен"
     
-    Создаем Application
+    # Создаем Application
     application = Application.builder().token(TOKEN).build()
     
-    Регистрируем обработчики команд
+    # Регистрируем обработчики команд
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CommandHandler("tip", eco_tip))
     application.add_handler(CommandHandler("alltips", all_tips))
     application.add_handler(CommandHandler("help", help_command))
     
-    Запускаем бота
+    # Запускаем бота
     logger.info("Бот запущен...")
     application.run_polling()
 
